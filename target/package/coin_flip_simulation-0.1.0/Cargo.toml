@@ -13,7 +13,11 @@
 edition = "2021"
 name = "coin_flip_simulation"
 version = "0.1.0"
+authors = ["Alexander Cooper"]
+description = "A coin flipping simulation, in preperation for a upcoming probability crate"
 readme = "README.md"
+license = "MIT"
+repository = "https://github.com/oberon-git/coin_flip_simulation"
 
 [dependencies.rand]
 version = "0.8.5"
