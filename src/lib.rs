@@ -22,6 +22,27 @@ pub fn run(iterations: usize, flips_per_iteration: u32) -> BTreeMap<String, f64>
     results
 }
 
+/// Gets the expected probability for each outcome given the number of flips per iteration.
+pub fn get_expected_probability(flips_per_iteration: u32) -> f64 {
+    let base: u32 = 2; 
+    let possible_outcomes = base.pow(flips_per_iteration) as f64;
+    1.0 / possible_outcomes
+}
+
+pub fn to_json(results: &BTreeMap<String, f64>, expected_probability: f64) -> String {
+    let indent = "    ";
+    let mut formatted_results = format!("{{\n{indent}expected: {:.5}\n{indent}actual: [\n", expected_probability);
+
+    for (k, v) in results {
+        let entry = format!("{indent}{indent}{{ {k}: {:.5} }}\n", v);
+        formatted_results.push_str(&entry);
+    }
+    
+    let close = format!("{indent}]\n}}");
+    formatted_results.push_str(&close);
+    formatted_results
+}
+
 #[derive(PartialEq)]
 enum Coin {
     Heads,

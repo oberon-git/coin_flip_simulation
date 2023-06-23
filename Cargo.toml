@@ -1,13 +1,12 @@
 [package]
 name = "coin_flip_simulation"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2021"
 authors = ["Alexander Cooper"]
-description = "A coin flipping simulation, in preperation for an upcoming probability crate."
+description = "A coin flipping simulation, in preperation for an upcoming probability crate. Prints results in JSON."
 repository = "https://github.com/oberon-git/coin_flip_simulation"
 license = "MIT"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+keywords = ["simulation", "probability", "coin_flipping", "cli", "json"]
 
 [dependencies]
 rand = "0.8.5"

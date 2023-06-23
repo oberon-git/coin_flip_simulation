@@ -1,0 +1,15 @@
+How many iterations?
+How many flips per iteration?
+{
+    expected: 0.12500
+    actual: [
+        { HHH: 0.12400 }
+        { HHT: 0.12912 }
+        { HTH: 0.12925 }
+        { HTT: 0.12237 }
+        { THH: 0.12275 }
+        { THT: 0.12400 }
+        { TTH: 0.12437 }
+        { TTT: 0.12412 }
+    ]
+}

@@ -1,33 +1,27 @@
-use std::io;
+use std::env;
 
 use coin_flip_simulation;
 
 fn main() {
-    println!("How many iterations?");
-    let mut iterations = String::new();
-    io::stdin()
-        .read_line(&mut iterations)
-        .unwrap();
+    let usage = "Usage: coin_flip_simulation <iterations: positve integer> <flips_per_iteration: positive integer>";
+    let mut args = env::args();
+    args.next();
 
-    let iterations = iterations
-        .trim()
-        .parse()
-        .expect("Please enter a positive integer");
+    let iterations = match args.next() {
+        Some(num) => num.trim().parse().expect(usage),
+        None => panic!("{}", usage),
+    };
 
-    println!("How many flips per iteration?");
-    let mut flips_per_iteration = String::new();
-    io::stdin()
-        .read_line(&mut flips_per_iteration)
-        .unwrap();
-
-    let flips_per_iteration = flips_per_iteration
-        .trim()
-        .parse()
-        .expect("Please enter a positve integer");
-
+    let flips_per_iteration = match args.next() {
+        Some(num) => num.trim().parse().expect(usage),
+        None => panic!("{}", usage),
+    };
+ 
+    let expected = coin_flip_simulation::get_expected_probability(flips_per_iteration);
     let results = coin_flip_simulation::run(iterations, flips_per_iteration);
-    
-    for (k, v) in results.iter() {
-        println!("{k}: {:.3}", v);
-    }
+   
+    let formatted_results = coin_flip_simulation::to_json(&results, expected);
+    println!("{formatted_results}");
 }
+
+
