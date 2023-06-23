@@ -1,10 +1,11 @@
 [package]
 name = "coin_flip_simulation"
-version = "0.2.0"
+version = "0.2.1"
 edition = "2021"
 authors = ["Alexander Cooper"]
 description = "A coin flipping simulation, in preperation for an upcoming probability crate. Prints results in JSON."
 repository = "https://github.com/oberon-git/coin_flip_simulation"
+documentation = "https://docs.rs/coin_flip_simulation/0.2.1/coin_flip_simulation/"
 license = "MIT"
 keywords = ["simulation", "probability", "coin_flipping", "cli", "json"]
 
