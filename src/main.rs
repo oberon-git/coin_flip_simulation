@@ -1,27 +1,52 @@
-use std::env;
+use std::{env, process};
 
 use coin_flip_simulation;
 
 fn main() {
-    let usage = "Usage: coin_flip_simulation <iterations: positve integer> <flips_per_iteration: positive integer>";
-    let mut args = env::args();
-    args.next();
+    let (flips_per_iteration, iterations) = parse_args();
 
-    let iterations = match args.next() {
-        Some(num) => num.trim().parse().expect(usage),
-        None => panic!("{}", usage),
-    };
-
-    let flips_per_iteration = match args.next() {
-        Some(num) => num.trim().parse().expect(usage),
-        None => panic!("{}", usage),
-    };
- 
-    let expected = coin_flip_simulation::get_expected_probability(flips_per_iteration);
-    let results = coin_flip_simulation::run(iterations, flips_per_iteration);
-   
-    let formatted_results = coin_flip_simulation::to_json(&results, expected);
-    println!("{formatted_results}");
+    let result = coin_flip_simulation::run(flips_per_iteration, iterations); 
+    println!("{result}");
 }
 
+fn parse_args() -> (usize, usize) {
+    let mut args = env::args();
+    args.next();
+ 
+    let on_err = || {
+        eprintln!("Usage: coin_flip_simulation<flips_per_iteration: positive integer> <iterations: positve integer>");
+        process::exit(1);
+    };
+    
+    let flips_per_iteration = args.next()
+        .unwrap_or_else(on_err);
+    
+    let flips_per_iteration: Result<usize, _> = flips_per_iteration
+        .trim()
+        .parse();
 
+    let flips_per_iteration = match flips_per_iteration {
+        Ok(num) => num,
+        Err(_) => {
+            on_err();
+            0
+        }
+    };
+
+    let iterations = args.next()
+        .unwrap_or_else(on_err);
+    
+    let iterations: Result<usize, _> = iterations
+        .trim()
+        .parse();
+
+    let iterations = match iterations {
+        Ok(num) => num,
+        Err(_) => {
+            on_err();
+            0
+        }, 
+    };
+
+    (flips_per_iteration, iterations)
+}
