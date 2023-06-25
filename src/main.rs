@@ -1,3 +1,10 @@
+//! Runs a coin flipping simulation for a given number of flips per iteration and total number of
+//! iterations.
+//!
+//! # Example Usage
+//!
+//! coin_flip_simulation 3 8000
+
 use std::{env, process};
 
 use coin_flip_simulation;
@@ -14,7 +21,7 @@ fn parse_args() -> (usize, usize) {
     args.next();
  
     let on_err = || {
-        eprintln!("Usage: coin_flip_simulation<flips_per_iteration: positive integer> <iterations: positve integer>");
+        eprintln!("usage: coin_flip_simulation flips_per_iteration iterations");
         process::exit(1);
     };
     
